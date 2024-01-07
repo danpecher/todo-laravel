@@ -1,6 +1,6 @@
 <script setup>
-import {TrashIcon} from "@heroicons/vue/24/outline/index.js";
-import {ref} from "vue";
+import { TrashIcon } from "@heroicons/vue/24/outline/index.js";
+import { ref } from "vue";
 
 const props = defineProps(['text', 'is_completed'])
 const emit = defineEmits(['onToggle', 'onUpdate', 'onDelete'])
