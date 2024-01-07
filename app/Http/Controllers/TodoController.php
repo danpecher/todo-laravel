@@ -4,12 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Todo;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class TodoController extends Controller
 {
     public function index()
     {
-        return Todo::all();
+        return Inertia::render('Todos', [
+            'todos' => Todo::orderByDesc('created_at')
+                ->get()
+        ]);
     }
 
     public function store(Request $request)
@@ -19,7 +23,9 @@ class TodoController extends Controller
             'is_completed' => ['boolean'],
         ]);
 
-        return Todo::create($data);
+        Todo::create($data);
+
+        return redirect()->back();
     }
 
     public function show(Todo $todo)
@@ -29,20 +35,15 @@ class TodoController extends Controller
 
     public function update(Request $request, Todo $todo)
     {
-        $data = $request->validate([
-            'text' => ['required'],
-            'is_completed' => ['boolean'],
-        ]);
+        $todo->update($request->all());
 
-        $todo->update($data);
-
-        return $todo;
+        return redirect()->back();
     }
 
     public function destroy(Todo $todo)
     {
         $todo->delete();
 
-        return response()->json();
+        return redirect()->back();
     }
 }

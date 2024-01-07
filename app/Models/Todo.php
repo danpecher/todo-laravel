@@ -13,4 +13,8 @@ class Todo extends Model
         'text',
         'is_completed'
     ];
+
+    protected $casts = [
+        'is_completed' => 'boolean'
+    ];
 }
