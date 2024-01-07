@@ -33,7 +33,8 @@ class TodoController extends Controller
     public function update(Request $request, Todo $todo)
     {
         $data = $request->validate([
-            'text' => ['max:2048']
+            'text' => ['max:2048'],
+            'is_completed' => ['boolean']
         ]);
 
         $todo->update($data);
