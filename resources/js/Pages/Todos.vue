@@ -43,10 +43,10 @@ function updateTodo(todo) {
         <h1 class="text-4xl font-semibold mx-2">Tasks</h1>
 
         <form @submit.prevent="submit">
-            <input v-model="todoText" type="text" placeholder="Create a todo ..." class="border border-gray-200 rounded-md h-10 my-5 mx-1 px-3 py-1 w-full shadow" />
+            <input v-model="todoText" type="text" placeholder="What to do..." class="border border-gray-200 rounded-md h-10 my-5 mx-1 px-3 py-1 w-full shadow text-lg font-medium placeholder:font-normal placeholder:text-base" />
         </form>
 
-        <div class="flex space-x-4 border-b border-gray-200 px-4 py-1 items-center" v-for="todo in todos" key="todo.id">
+        <div class="flex space-x-4 border-b border-gray-200 px-4 py-1 items-center hover:bg-gray-100" v-for="todo in todos" key="todo.id">
             <input type="checkbox" :checked="todo.is_completed" v-on:change="() => toggleTodo(todo.id, todo.is_completed)" class="h-full w-5 accent-green-700 rounded-full" />
 
             <div class="flex-grow" :class="{ 'line-through': todo.is_completed, 'opacity-50': todo.is_completed }">
@@ -55,7 +55,7 @@ function updateTodo(todo) {
                 </span>
 
                 <form v-else @submit.prevent="() => updateTodo(todo)">
-                    <input @focusout="() => updateTodo(todo)" class="w-full" type="text" v-model="todo.text" />
+                    <input @focusout="() => updateTodo(todo)" class="w-full bg-transparent" type="text" v-model="todo.text" />
                 </form>
             </div>
 
