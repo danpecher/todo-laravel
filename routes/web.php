@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\TodoController;
+use App\Models\Todo;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,5 +15,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/', function() {
+    return Inertia::render('Todos', [
+        'todos' => Todo::orderByDesc('created_at')
+            ->get()
+    ]);
+});
 
 Route::apiResource('todos', TodoController::class);

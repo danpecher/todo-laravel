@@ -10,10 +10,7 @@ class TodoController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Todos', [
-            'todos' => Todo::orderByDesc('created_at')
-                ->get()
-        ]);
+        return redirect('/');
     }
 
     public function store(Request $request)
