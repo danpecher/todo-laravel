@@ -6,7 +6,7 @@ const emit = defineEmits(['onCreate'])
 const todoText = ref('')
 
 function handleSubmit() {
-    if (todoText.length <= 0) {
+    if (todoText.value.length <= 0) {
         return
     }
 
