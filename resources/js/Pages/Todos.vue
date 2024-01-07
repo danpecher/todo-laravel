@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { router } from "@inertiajs/vue3"
 import { TrashIcon } from "@heroicons/vue/24/outline"
+import TodoInput from "../Components/TodoInput.vue";
 
 defineProps({ todos: Array })
 
@@ -19,16 +20,10 @@ function deleteTodo(id) {
     router.delete(`/todos/${id}`)
 }
 
-function submit() {
-    if (todoText.value.length <= 0) {
-        return
-    }
-
+function createTodo(text) {
     router.post('/todos', {
-        text: todoText.value
+        text: text
     })
-
-    todoText.value = ''
 }
 
 function updateTodo(todo) {
@@ -42,9 +37,7 @@ function updateTodo(todo) {
     <div class="container mx-auto flex flex-col h-screen my-8">
         <h1 class="text-4xl font-semibold mx-2">Tasks</h1>
 
-        <form @submit.prevent="submit">
-            <input v-model="todoText" type="text" placeholder="What to do..." class="border border-gray-200 rounded-md h-10 my-5 mx-1 px-3 py-1 w-full shadow text-lg font-medium placeholder:font-normal placeholder:text-base" />
-        </form>
+        <TodoInput @on-create="text => createTodo(text)" />
 
         <div class="group flex space-x-4 border-b border-gray-200 px-4 py-1 items-center hover:bg-gray-100" v-for="todo in todos" key="todo.id">
             <input type="checkbox" :checked="todo.is_completed" v-on:change="() => toggleTodo(todo.id, todo.is_completed)" class="h-full w-5 accent-green-700 rounded-full" />
