@@ -27,7 +27,7 @@ function handleUpdate() {
                 </span>
 
             <form v-else @submit.prevent="handleUpdate">
-                <input @focusout="handleUpdate" class="w-full bg-transparent" type="text" v-model="text" />
+                <input @focusout="handleUpdate" class="w-full bg-transparent" type="text" v-model="text" maxlength="2048" />
             </form>
         </div>
 

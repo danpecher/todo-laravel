@@ -9,7 +9,7 @@ return new class extends Migration {
     {
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
-            $table->string('text');
+            $table->text('text');
             $table->boolean('is_completed')
                 ->default(false);
             $table->softDeletes();

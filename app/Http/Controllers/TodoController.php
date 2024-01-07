@@ -19,7 +19,7 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'text' => ['required'],
+            'text' => ['required', 'max:2048'],
             'is_completed' => ['boolean'],
         ]);
 
@@ -35,7 +35,11 @@ class TodoController extends Controller
 
     public function update(Request $request, Todo $todo)
     {
-        $todo->update($request->all());
+        $data = $request->validate([
+            'text' => ['max:2048']
+        ]);
+
+        $todo->update($data);
 
         return redirect()->back();
     }
